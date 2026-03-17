@@ -33,7 +33,7 @@ export default function Header({ sidebarOpen, onToggleSidebar }: HeaderProps) {
 
       <div className="flex items-center gap-3">
         <a
-          href="https://github.com/Spivack/r00tstack"
+          href="https://github.com/Spivack/spivhack"
           target="_blank"
           rel="noopener noreferrer"
           className="p-1.5 text-green-700 hover:text-green-400 hover:bg-green-950 transition-colors"
