@@ -1,21 +1,21 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/layout/Layout';
-import GatePage from './pages/GatePage';
-import HomePage from './pages/HomePage';
-import TopicPage from './pages/TopicPage';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import MenuPage from './pages/MenuPage';
+import LearnPage from './pages/LearnPage';
+import PuzzlePage from './pages/PuzzlePage';
+import { ProgressProvider } from './context/ProgressContext';
 
 export default function App() {
   return (
+    <ProgressProvider>
     <HashRouter>
       <Routes>
-        <Route path="/" element={<GatePage />} />
-        <Route path="/topics" element={<Layout />}>
-          <Route index element={<HomePage />} />
-        </Route>
-        <Route path="/topic/:topicId" element={<Layout />}>
-          <Route index element={<TopicPage />} />
-        </Route>
+        <Route path="/" element={<MenuPage />} />
+<Route path="/learn" element={<LearnPage />} />
+        <Route path="/puzzle/:id" element={<PuzzlePage />} />
+        {/* /puzzles redirects to menu for now */}
+        <Route path="/puzzles" element={<Navigate to="/" replace />} />
       </Routes>
     </HashRouter>
+    </ProgressProvider>
   );
 }
