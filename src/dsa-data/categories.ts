@@ -135,6 +135,6 @@ export const categories: Category[] = [
 ];
 
 // Flat lookup map for O(1) topic access
-export const topicMap = new Map<string, import('../types').Topic>(
+export const topicMap = new Map<string, import('../dsa-types').Topic>(
   categories.flatMap((cat) => cat.topics.map((t) => [t.id, t]))
 );

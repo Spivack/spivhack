@@ -1,4 +1,4 @@
-import type { Language, Topic } from '../types';
+import type { Language, Topic } from '../dsa-types';
 
 export const ALL_LANGUAGES: Language[] = ['python', 'java', 'javascript', 'typescript'];
 

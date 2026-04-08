@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { getAvailableLanguages, clampStep, stepDirection } from '../tutorial';
-import type { Topic } from '../../types';
+import type { Topic } from '../../dsa-types';
 
 // ─── getAvailableLanguages ────────────────────────────────────────────────────
 
