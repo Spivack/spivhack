@@ -18,7 +18,7 @@ export default function DsaHomePage() {
       <div className="max-w-5xl mx-auto px-5 py-10">
         {/* Header */}
         <div className="mb-8">
-          <div className="font-mono text-gray-600 text-sm tracking-widest mb-1">[ DATA STRUCTURES & ALGORITHMS ]</div>
+          <div className="font-mono text-gray-600 text-sm tracking-widest mb-1">[ DSA REFERENCE ]</div>
           <h1 className="font-pixel text-4xl text-white leading-none mb-2">DSA</h1>
           <p className="font-mono text-sm text-gray-400">
             {totalTopics} topics across {categories.length} categories. Step-by-step breakdowns with code and visualizations.

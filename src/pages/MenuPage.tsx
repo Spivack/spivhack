@@ -39,7 +39,7 @@ export default function MenuPage() {
           {/* ── DSA ── */}
           <div className="panel p-6 flex flex-col gap-4">
             <div>
-              <div className="font-mono text-gray-600 text-sm tracking-widest mb-2">[ DATA STRUCTURES & ALGORITHMS ]</div>
+              <div className="font-mono text-gray-600 text-sm tracking-widest mb-2">[ DSA ]</div>
               <div className="font-pixel text-3xl text-white leading-none mb-2">DSA</div>
               <p className="font-mono text-sm text-gray-400 leading-relaxed">
                 {totalDsaTopics} topics across {categories.length} categories — complexity, sorting, graphs, dynamic programming, and more.
