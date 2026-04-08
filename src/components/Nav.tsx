@@ -18,16 +18,22 @@ export default function Nav() {
         {/* Center links */}
         <div className="flex items-center gap-6 font-mono text-sm">
           <Link
-            to="/puzzles"
-            className={`transition-colors ${pathname.startsWith('/puzzle') ? 'text-[#00FF00]' : 'text-gray-500 hover:text-gray-300'}`}
+            to="/dsa"
+            className={`transition-colors ${pathname.startsWith('/dsa') ? 'text-[#00FF00]' : 'text-gray-500 hover:text-gray-300'}`}
           >
-            puzzles
+            dsa
           </Link>
           <Link
             to="/learn"
             className={`transition-colors ${pathname.startsWith('/learn') ? 'text-[#00FF00]' : 'text-gray-500 hover:text-gray-300'}`}
           >
-            learn
+            security
+          </Link>
+          <Link
+            to="/challenges"
+            className={`transition-colors ${pathname.startsWith('/puzzle') || pathname === '/challenges' ? 'text-[#00FF00]' : 'text-gray-500 hover:text-gray-300'}`}
+          >
+            challenges
           </Link>
         </div>
 

@@ -7,5 +7,6 @@ export default defineConfig({
   base: '/',
   test: {
     environment: 'node',
+    exclude: ['dsa-export/**', 'node_modules/**'],
   },
 })
