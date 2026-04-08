@@ -3,6 +3,7 @@ import Nav from '../components/Nav';
 import { PUZZLES } from '../data/puzzles';
 import { REFERENCE_SECTIONS } from '../data/reference-topics';
 import { useProgressContext } from '../context/ProgressContext';
+import { categories } from '../dsa-data/categories';
 
 const DIFFICULTY_COLOR = {
   easy:   'text-[#00FF00]',
@@ -10,7 +11,8 @@ const DIFFICULTY_COLOR = {
   hard:   'text-[#FF0080]',
 } as const;
 
-const totalTopics = REFERENCE_SECTIONS.reduce((n, s) => n + s.topics.length, 0);
+const totalSecurityTopics = REFERENCE_SECTIONS.reduce((n, s) => n + s.topics.length, 0);
+const totalDsaTopics = categories.reduce((n, c) => n + c.topics.length, 0);
 
 export default function MenuPage() {
   const { solvedIds } = useProgressContext();
@@ -31,16 +33,72 @@ export default function MenuPage() {
           </div>
         </div>
 
-        {/* Two-column layout */}
-        <div className="grid lg:grid-cols-2 gap-5">
+        {/* Three-column layout */}
+        <div className="grid lg:grid-cols-3 gap-5">
 
-          {/* ── Puzzles ── */}
+          {/* ── DSA ── */}
+          <div className="panel p-6 flex flex-col gap-4">
+            <div>
+              <div className="font-mono text-gray-600 text-sm tracking-widest mb-2">[ DATA STRUCTURES & ALGORITHMS ]</div>
+              <div className="font-pixel text-3xl text-white leading-none mb-2">DSA</div>
+              <p className="font-mono text-sm text-gray-400 leading-relaxed">
+                {totalDsaTopics} topics across {categories.length} categories — complexity, sorting, graphs, dynamic programming, and more.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1.5 flex-1">
+              {categories.map((cat) => (
+                <Link
+                  key={cat.id}
+                  to={`/dsa/topic/${cat.topics[0].id}`}
+                  className="group flex items-baseline justify-between border border-[#2a2a2a] hover:border-[#00FF00] hover:bg-[#161616] px-3 py-2 transition-colors"
+                >
+                  <span className="font-mono text-sm text-gray-300 group-hover:text-white transition-colors truncate">
+                    {cat.icon} {cat.title}
+                  </span>
+                  <span className="font-mono text-sm text-gray-600 shrink-0 ml-2">{cat.topics.length}</span>
+                </Link>
+              ))}
+            </div>
+            <Link
+              to="/dsa"
+              className="font-mono text-sm text-[#00FF00] transition-colors"
+            >
+              &gt; browse all topics →
+            </Link>
+          </div>
+
+          {/* ── Security ── */}
+          <div className="panel p-6 flex flex-col gap-4">
+            <div>
+              <div className="font-mono text-gray-600 text-sm tracking-widest mb-2">[ REFERENCE ]</div>
+              <div className="font-pixel text-3xl text-white leading-none mb-2">Security</div>
+              <p className="font-mono text-sm text-gray-400 leading-relaxed">
+                {totalSecurityTopics} topics across 8 sections. Security+, CEH, OSCP reference material — crypto, networks, identity, AI security, and more.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              {REFERENCE_SECTIONS.map((section) => (
+                <div key={section.id} className="flex items-baseline justify-between">
+                  <span className="font-mono text-sm text-gray-400">{section.title}</span>
+                  <span className="font-mono text-sm text-gray-600">{section.topics.length} topics</span>
+                </div>
+              ))}
+            </div>
+            <Link
+              to="/learn"
+              className="font-mono text-sm text-[#00FF00] transition-colors"
+            >
+              &gt; browse all topics →
+            </Link>
+          </div>
+
+          {/* ── Challenges ── */}
           <div className="panel p-6 flex flex-col gap-4">
             <div>
               <div className="font-mono text-gray-600 text-sm tracking-widest mb-2">[ CHALLENGES ]</div>
-              <div className="font-pixel text-3xl text-white leading-none mb-2">Puzzles</div>
+              <div className="font-pixel text-3xl text-white leading-none mb-2">Challenges</div>
               <p className="font-mono text-sm text-gray-400 leading-relaxed">
-                Interactive OWASP exploits. Each puzzle is a real vulnerability class — exploit it, then read why it works and how to prevent it.
+                Interactive OWASP exploits. Each challenge is a real vulnerability class — exploit it, then read why it works and how to prevent it.
               </p>
             </div>
             <div className="flex flex-col gap-1.5 flex-1">
@@ -76,35 +134,10 @@ export default function MenuPage() {
               )}
             </div>
             <Link
-              to="/puzzle/1"
-              className="font-mono text-sm text-[#00FF00] hover:text-[#00FF00] transition-colors"
+              to="/challenges"
+              className="font-mono text-sm text-[#00FF00] transition-colors"
             >
-              &gt; start puzzle 01 →
-            </Link>
-          </div>
-
-          {/* ── Learn ── */}
-          <div className="panel p-6 flex flex-col gap-4">
-            <div>
-              <div className="font-mono text-gray-600 text-sm tracking-widest mb-2">[ REFERENCE ]</div>
-              <div className="font-pixel text-3xl text-white leading-none mb-2">Learn</div>
-              <p className="font-mono text-sm text-gray-400 leading-relaxed">
-                {totalTopics} topics across 8 sections. Security+, CEH, OSCP reference material — crypto, networks, identity, AI security, and more.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 flex-1">
-              {REFERENCE_SECTIONS.map((section) => (
-                <div key={section.id} className="flex items-baseline justify-between">
-                  <span className="font-mono text-sm text-gray-400">{section.title}</span>
-                  <span className="font-mono text-sm text-gray-600">{section.topics.length} topics</span>
-                </div>
-              ))}
-            </div>
-            <Link
-              to="/learn"
-              className="font-mono text-sm text-[#00FF00] hover:text-[#00FF00] transition-colors"
-            >
-              &gt; browse all topics →
+              &gt; browse challenges →
             </Link>
           </div>
         </div>
