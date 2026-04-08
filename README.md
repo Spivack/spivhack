@@ -1,15 +1,14 @@
 # SpivHack
 
-A browser-based cybersecurity learning platform. Six interactive puzzles covering real-world web vulnerabilities, a full reference library of 63 security topics, and a puzzle solutions guide.
+A browser-based cybersecurity learning platform with three sections: interactive exploit challenges covering real-world web vulnerabilities, a security reference library, and a full data structures & algorithms tutorial.
 
 Live at **spivhack.com**
 
 ## What It Is
 
-SpivHack is a self-contained hacking practice environment. Each puzzle simulates a real vulnerability class — SQL injection, XSS, path traversal, IDOR, token forgery, and security misconfiguration. The Learn section covers 63 topics across 8 categories with expandable write-ups on mechanisms, examples, impact, and defenses.
+SpivHack is a self-contained hacking practice environment. Each challenge simulates a real vulnerability class — SQL injection, XSS, path traversal, IDOR, token forgery, and security misconfiguration. The Security section covers 63 topics across 8 categories with expandable write-ups on mechanisms, examples, impact, and defenses. The DSA section covers 37 topics across 10 categories with step-by-step tutorials, code in multiple languages, and visualizations.
 
-
-## Puzzles
+## Challenges
 
 | # | Title | Vulnerability | Difficulty |
 |---|---|---|---|
@@ -22,7 +21,7 @@ SpivHack is a self-contained hacking practice environment. Each puzzle simulates
 
 Full solutions in [docs/puzzle-solutions.md](docs/puzzle-solutions.md).
 
-## Learn Topics
+## Security Topics
 
 63 topics across 8 sections, each with expandable content covering mechanism, example, impact, and defense:
 
@@ -35,11 +34,28 @@ Full solutions in [docs/puzzle-solutions.md](docs/puzzle-solutions.md).
 - **AI Security** — Prompt Injection, Indirect Injection, Jailbreaking, Model Inversion, Adversarial Inputs, RAG Attacks
 - **Frameworks** — MITRE ATT&CK, Cyber Kill Chain, NIST CSF, Incident Response, Security+, OSCP, Bug Bounty
 
+## DSA
+
+37 topics across 10 categories, each with step-by-step explanations, code in Python/Java/JS/TS, and interactive visualizations:
+
+- **Complexity** — Big-O Notation, P vs NP
+- **Lists & Stacks** — List ADT, Array List, Linked List, Doubly Linked List, Stack, Linked Stack, Monotonic Stack
+- **Recursion** — Recursion, Backtracking
+- **Sorting** — Bubble, Insertion, Selection, Shell, Merge, Quick, Heap, Radix
+- **Searching** — Linear Search, Binary Search
+- **Hash Tables & Queues** — Hash Table, Queue
+- **Trees** — Binary Trees, Heaps & Priority Queues, General Trees, Union-Find
+- **Dynamic Programming** — Fibonacci, Knapsack, Longest Common Subsequence, Coin Change
+- **Graphs** — BFS, DFS, Topological Sort, Dijkstra's, Minimum Spanning Tree
+- **Patterns** — Two Pointers, Sliding Window, Merge Intervals
+
 ## Tech Stack
 
 - **React 18** + **TypeScript** + **Vite 5**
 - **Tailwind CSS v4** (arbitrary value syntax)
 - **HashRouter** — fully static, no server required
+- **framer-motion** — step transitions and visualizations
+- **prism-react-renderer** — syntax-highlighted code blocks
 - Progress tracked in `localStorage` via `ProgressContext`
 - Deployed to GitHub Pages via GitHub Actions
 
@@ -47,26 +63,29 @@ Full solutions in [docs/puzzle-solutions.md](docs/puzzle-solutions.md).
 
 ```bash
 npm install
-npm run dev
-```
-
-Build:
-
-```bash
-npm run build
+npm run dev        # dev server at localhost:5173
+npm test           # vitest unit tests
+npm run build      # production build → dist/
+npm run preview    # preview production build locally
 ```
 
 The `dist/` folder is a fully static site — drop it anywhere or serve with any static host.
-
 
 ## Project Structure
 
 ```
 src/
   components/
-    Nav.tsx                  # top navigation, progress dots
+    Nav.tsx                    # top navigation bar
+    dsa-tutorial/
+      TutorialViewer.tsx       # step-by-step tutorial UI
+      CodeBlock.tsx            # syntax-highlighted code
+      Visualization.tsx        # sorting, array, graph, tree visuals
+      LanguageSwitcher.tsx
+      StepCallout.tsx
+      ComplexityBadge.tsx
     puzzles/
-      PuzzleShell.tsx        # shared puzzle wrapper (lesson panel on solve)
+      PuzzleShell.tsx          # shared challenge wrapper
       Puzzle1StackTrace.tsx
       Puzzle2SQLi.tsx
       Puzzle3XSS.tsx
@@ -74,17 +93,27 @@ src/
       Puzzle5PathTraversal.tsx
       Puzzle6WeakToken.tsx
   context/
-    ProgressContext.tsx      # localStorage-backed solved state
+    ProgressContext.tsx        # localStorage-backed solved state
   data/
-    puzzles.ts               # puzzle metadata
-    reference-topics.ts      # all 63 learn topics with body content
+    puzzles.ts                 # challenge metadata
+    reference-topics.ts        # 63 security topics with body content
+  dsa-data/
+    categories.ts              # DSA category + topic index
+    topics/                    # individual topic files (10 categories)
+  dsa-types/
+    index.ts                   # shared types for DSA (Topic, Step, etc.)
+  dsa-utils/
+    tutorial.ts                # language availability, step helpers
   pages/
-    MenuPage.tsx             # home / puzzle list
-    PuzzlePage.tsx           # routes puzzle ID to component
-    LearnPage.tsx            # reference library with search + filter
+    MenuPage.tsx               # home — DSA / Security / Challenges panels
+    ChallengesPage.tsx         # challenge list
+    PuzzlePage.tsx             # routes challenge ID to component
+    LearnPage.tsx              # security reference with search + filter
+    DsaHomePage.tsx            # DSA topic browser
+    DsaTopicPage.tsx           # individual DSA topic with tutorial viewer
 docs/
-  puzzle-solutions.md        # full spoiler walkthroughs
-  architecture.html          # system diagram
+  puzzle-solutions.md          # full spoiler walkthroughs
+  architecture.html            # system diagram
 ```
 
 ## Deployment
